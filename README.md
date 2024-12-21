@@ -1,36 +1,154 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js 15 SaaS Template with Supabase and Stripe
+
+A modern, production-ready SaaS template built with Next.js 15, Supabase, and Stripe. Features include authentication, subscription management, and a beautiful UI powered by Tailwind CSS.
+
+## Features
+
+- 🚀 Next.js 15 with App Router
+- 🔐 Authentication with Supabase SSR
+- 💳 Subscription Management with Stripe
+- 🎨 Beautiful UI with Tailwind CSS and Radix UI
+- 📱 Fully Responsive Design
+- 🌙 Dark Mode Support
+- 🔒 Role-Based Access Control
+- 📊 Dashboard Interface
+- 💰 Subscription Plans and Billing
+- ⚡ Optimized Performance
+- 🔍 SEO Friendly
+
+## Prerequisites
+
+- Node.js 18.17 or later
+- PNPM package manager
+- Supabase account
+- Stripe account
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+   ```bash
+   git clone [your-repo-url]
+   cd [your-repo-name]
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   pnpm install
+   ```
+
+3. Copy the environment variables:
+
+   ```bash
+   cp .env.example .env.local
+   ```
+
+4. Set up Supabase:
+   - Create a new project in Supabase
+   - Copy the project URL and anon key to .env.local
+   - Run the database migrations (instructions below)
+
+5. Set up Stripe:
+   - Create a Stripe account
+   - Add your Stripe API keys to .env.local
+   - Create your subscription products and prices
+   - Update the price IDs in .env.local
+
+6. Run the development server:
+
+   ```bash
+   pnpm dev
+   ```
+
+## Supabase Setup
+
+1. Create a new project in Supabase
+2. Go to Project Settings > API
+3. Copy the following values to your .env.local:
+   - Project URL (NEXT_PUBLIC_SUPABASE_URL)
+   - Anon Key (NEXT_PUBLIC_SUPABASE_ANON_KEY)
+   - Service Role Key (SUPABASE_SERVICE_ROLE_KEY)
+
+4. Set up the database schema:
+   - Navigate to the SQL editor
+   - Copy the contents of `supabase/schema.sql`
+   - Run the SQL commands
+
+## Stripe Setup
+
+1. Create a Stripe account
+2. Get your API keys from the Stripe Dashboard
+3. Add them to your .env.local:
+   - Publishable Key (NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+   - Secret Key (STRIPE_SECRET_KEY)
+
+4. Create your subscription products:
+   - Go to Stripe Dashboard > Products
+   - Create products with recurring prices
+   - Copy the price IDs to your .env.local
+
+5. Set up webhooks:
+   - Go to Stripe Dashboard > Webhooks
+   - Add an endpoint: `[your-domain]/api/webhooks/stripe`
+   - Select events to listen to:
+     - customer.subscription.created
+     - customer.subscription.updated
+     - customer.subscription.deleted
+   - Copy the webhook secret to STRIPE_WEBHOOK_SECRET in .env.local
+
+## Project Structure
+
+``` nextjs
+├── app/
+│   ├── (auth)/
+│   │   ├── login/
+│   │   ├── register/
+│   │   └── reset-password/
+│   ├── (dashboard)/
+│   │   ├── dashboard/
+│   │   ├── settings/
+│   │   └── billing/
+│   ├── api/
+│   └── layout.tsx
+├── components/
+│   ├── auth/
+│   ├── billing/
+│   ├── dashboard/
+│   ├── layout/
+│   ├── shared/
+│   └── ui/
+├── lib/
+│   ├── supabase/
+│   └── stripe/
+├── types/
+└── middleware.ts
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Available Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `pnpm dev` - Start development server
+- `pnpm build` - Build for production
+- `pnpm start` - Start production server
+- `pnpm lint` - Run ESLint
+- `pnpm format` - Format code with Prettier
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment Variables
 
-## Learn More
+See `.env.example` for all required environment variables.
 
-To learn more about Next.js, take a look at the following resources:
+## Contributing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Support
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+For support, email [your-email] or open an issue in the repository.
